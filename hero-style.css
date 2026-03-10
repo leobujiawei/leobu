@@ -1,0 +1,114 @@
+/* Hero Section Layout */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    /* Accounts for top bar */
+}
+
+.hero-grid {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 80vh;
+    border-top: 1px solid var(--border-color);
+}
+
+.hero-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Left Column */
+.hero-left {
+    flex: 1;
+    padding: 60px 40px;
+    border-right: 1px solid var(--border-color);
+    justify-content: space-between;
+}
+
+.hero-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 6vw;
+    line-height: 0.85;
+    margin-top: 20px;
+    font-weight: normal;
+    letter-spacing: -0.02em;
+    margin-bottom: auto;
+    /* Pushes the next elements down */
+}
+
+.hero-desc {
+    font-size: 11px;
+    line-height: 1.6;
+    max-width: 250px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    color: var(--text-muted);
+}
+
+.hero-bottom-list {
+    font-size: 11px;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.hero-bottom-list div {
+    margin-bottom: 5px;
+}
+
+
+
+/* Right Column (Image) */
+.hero-right {
+    flex: 1.2;
+    background-color: var(--bg-color);
+    position: relative;
+}
+
+.hero-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-portrait {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (max-width: 1024px) {
+    .hero-grid {
+        flex-direction: column;
+    }
+
+    .hero-left,
+    .hero-right {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-title {
+        font-size: 9vw;
+    }
+
+    .hero-right {
+        height: 60vh;
+    }
+}

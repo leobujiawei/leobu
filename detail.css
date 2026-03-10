@@ -1,0 +1,295 @@
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --text-muted: #999999;
+    --accent-color: #a6192e;
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    --font-heading: 'NeueMachina-Ultrabold', sans-serif;
+    --font-body: 'NeueMachina-Regular', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.detail-active {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Navbar */
+.detail-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background-color: var(--bg-color);
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--text-color);
+}
+
+.topbar-title {
+    color: var(--text-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.topbar-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.3s;
+}
+
+.nav-btn:hover {
+    color: var(--accent-color);
+}
+
+.nav-divider {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* Layout Container */
+.detail-container {
+    display: flex;
+    height: 100vh;
+    padding-top: 65px;
+    /* offset topbar */
+}
+
+/* Left Nav - Vertical Progress Tabs */
+.geo-tabs {
+    flex: 0 0 100px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    z-index: 10;
+}
+
+.geo-tab {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    transition: background 0.3s ease;
+}
+
+.geo-tab:last-child {
+    border-bottom: none;
+}
+
+.geo-tab .progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    /* Dynamic progress */
+    background: #fff;
+    z-index: 1;
+    transition: height 0.05s linear;
+}
+
+.geo-tab .tab-text {
+    position: relative;
+    z-index: 5;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    mix-blend-mode: difference;
+    /* Inverts text */
+    writing-mode: vertical-rl;
+    /* Fixed vertical text */
+    text-orientation: upright;
+    white-space: nowrap;
+}
+
+.geo-tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Scroll Progress Logic handled by JS */
+
+/* Right Content Area */
+.content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Hide scrollbar for cleaner look */
+.content-scroll::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.content-wrapper {
+    padding: 10vh 12vw 15vh 8vw;
+    display: flex;
+    flex-direction: column;
+    gap: 15vh;
+    /* huge gap between sections */
+}
+
+/* Section styling */
+.detail-section {
+    position: relative;
+    padding-top: 40px;
+    /* offset for anchor scroll */
+}
+
+.section-title {
+    display: flex;
+    flex-direction: column;
+    /* Stack Part X and Title */
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.section-num {
+    font-family: var(--font-heading);
+    font-size: 72px;
+    /* Large 72px font */
+    font-weight: normal;
+    line-height: 1;
+    color: #ffffff;
+    /* Primary white color */
+    opacity: 1;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+.section-num::before {
+    content: "PART ";
+    /* Added "PART" prefix */
+}
+
+.section-title h2 {
+    font-family: 'NeueMachina-Regular', sans-serif;
+    font-size: 1.2rem;
+    /* Smaller subtitle */
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.section-desc {
+    visibility: hidden;
+    /* Hide text but keep space */
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+    max-width: 700px;
+}
+
+/* Demo image gallery */
+.image-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.demo-image {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.demo-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Optional: Keep a very subtle dimming if desired, but request asked for 'original colors' */
+/* .demo-image img:hover { ... } - REMOVED */
+
+.image-gallery.no-gap {
+    gap: 0;
+}
+
+.image-gallery.no-gap .demo-image {
+    margin-bottom: 0;
+}
+
+.image-gallery.gap-16 {
+    gap: 16px;
+}
+
+.image-gallery.gap-16 .demo-image {
+    margin-bottom: 0;
+}
+
+.demo-image:hover {
+    filter: grayscale(0%) contrast(1);
+}
+
+.demo-image.overlay-container {
+    position: relative;
+}
+
+.demo-image.overlay-container img.overlay-img {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 5;
+    background-color: transparent !important;
+}
+
+.demo-image.overlay-container img.overlay-img.left {
+    left: 0;
+}
+
+.demo-image.overlay-container img.overlay-img.right {
+    right: 0;
+}
+
+.demo-image.overlay-container img.overlay-img.full {
+    left: 0;
+    width: 100%;
+}

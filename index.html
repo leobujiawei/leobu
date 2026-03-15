@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人作品集 | KANSO 风格</title>
+    <title>Leo Bu - Visual Designer</title>
     <meta name="description" content="个人创意作品集，展示设计与开发项目。">
     <link rel="preload" href="PPNeueMachina-InktrapRegular.otf" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="PPNeueMachina-PlainUltrabold.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="PPNeueMachina-InktrapUltrabold.otf" as="font" type="font/otf" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hero-style.css">
     <style>
@@ -46,19 +46,14 @@
     <div id="home-view">
         <!-- Top Bar (Navbar) -->
         <nav class="topbar">
-            <div class="topbar-col">
-                <span class="scramble-text">DIGITAL DESIGN / DEV</span><br>
-                <span class="scramble-text">PORTFOLIO</span>
+            <div class="topbar-left">
+                <div class="topbar-logo-dot"></div>
+                <span class="topbar-brand">Leobu</span>
             </div>
-            <div class="topbar-col">
-                <span class="scramble-text">CREATIVE CODER //</span>
-            </div>
-            <div class="topbar-col">
-                <span class="scramble-text">FRONTEND DEVELOPER</span><br>
-                <span class="scramble-text">INTERACTION DESIGNER</span>
-            </div>
-            <div class="topbar-col right-align">
-                <span class="scramble-text">FEBRUARY 2026</span>
+            <div class="topbar-right">
+                <a href="#about" onclick="locoScroll.scrollTo('#about')" class="scramble-text">About me</a>
+                <a href="#work" onclick="locoScroll.scrollTo('#work')" class="scramble-text">Work</a>
+                <a href="#contact" onclick="locoScroll.scrollTo('#contact')" class="scramble-text">Get in Touch</a>
             </div>
         </nav>
 
@@ -66,66 +61,137 @@
 
             <!-- Hero Section -->
             <header class="hero-section" data-scroll-section>
-                <div class="hero-grid">
-                    <!-- Left Column text -->
-                    <div class="hero-col hero-left">
-                        <div class="hero-label scramble-text">DEV ACADEMY</div>
-                        <h1 class="hero-title">
+                <div class="hero-stage">
+                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/left.png"
+                        class="hero-curtain hero-curtain-left" alt="Left Curtain">
+                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/right.png"
+                        class="hero-curtain hero-curtain-right" alt="Right Curtain">
+                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/stage.png"
+                        class="hero-stage-bg" alt="Stage Frame">
+                    <div class="flashlight"></div>
+
+                    <!-- Geometric Shapes -->
+                    <svg class="hero-geo-shape geo-pentagon" viewBox="0 0 100 100">
+                        <polygon points="50,5 95,38 78,92 22,92 5,38" />
+                    </svg>
+                    <svg class="hero-geo-shape geo-circle" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" />
+                    </svg>
+                    <svg class="hero-geo-shape geo-diamond" viewBox="0 0 100 100">
+                        <path d="M50 5 L95 50 L50 95 L5 50 Z" />
+                    </svg>
+
+                    <div class="hero-center-content">
+                        <h1 class="hero-main-title">
                             <div class="scramble-text">Welcome to</div>
-                            <div class="scramble-text">Leo‘s</div>
+                            <div class="scramble-text">Leo's</div>
                             <div class="scramble-text">Design Theatre</div>
                         </h1>
-
-                        <p class="hero-desc scramble-text">
-                            在顶级数字体验的世界中，卓越的<br>
-                            代码与精妙的设计相辅相成，共同<br>
-                            铸就了我们对数字产品的自信、<br>
-                            个性与极致追求。
-                        </p>
-
-                        <div class="hero-bottom-list">
-                            <div class="scramble-text">Interactive collection</div>
-                            <div class="scramble-text">Primitive nature</div>
-                            <div class="scramble-text">Futuristic Web Finesse</div>
+                        <div class="hero-scroll-indicator">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/scroll.png"
+                                class="scroll-spin" alt="Scroll Down">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/arrow.png"
+                                class="scroll-arrow" alt="Arrow">
                         </div>
                     </div>
 
-                    <div class="hero-col hero-right">
-                        <div class="hero-image-wrapper">
-                            <div class="hero-portrait"
-                                style="background-image: url('https://test.fukit.cn/autoupload/f/dzdAUSwyKspOVHiMSj2cUrKXl_QqVl-bpSwqP4fJO68/20260222/hs0Z/992X1241/01.png');">
-                            </div>
-                        </div>
+                    <!-- Hidden Interactive Images on Stage Sides -->
+                    <div class="hero-hidden-images">
+                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st01.png"
+                            class="hero-hidden-image st-01" alt="Stage Side 1">
+                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st02.png"
+                            class="hero-hidden-image st-02" alt="Stage Side 2">
+                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st03.png"
+                            class="hero-hidden-image st-03" alt="Stage Side 3">
+                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st04.png"
+                            class="hero-hidden-image st-04" alt="Stage Side 4">
+                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st05.png"
+                            class="hero-hidden-image st-05" alt="Stage Side 5">
                     </div>
                 </div>
             </header>
 
-            <!-- Intro / About Section -->
+            <!-- About Section -->
             <section class="about-section" id="about" data-scroll-section>
-                <div class="massive-text-container">
-                    <div class="massive-line">WE ARE A BEACON</div>
-                    <div class="massive-line indent-1">OF STYLE <span class="asterisk">✶</span> AND</div>
-                    <div class="massive-line indent-2">SOPHISTICATION</div>
-                </div>
+                <div class="about-scroll-wrapper" data-scroll>
+                    <div class="about-container">
+                        <!-- Column 1: Profile Info -->
+                        <div class="about-col profile-col">
+                            <h2 class="about-main-title scramble-text">About me</h2>
+                            <div class="about-highlights">
+                                <p>Base in Shenzhen</p>
+                                <p>Visual Designer 2018~Now</p>
+                            </div>
+                            <div class="about-edu">
+                                <div class="edu-item">
+                                    <span>西安交通大学</span>
+                                    <p>视觉传达设计 本科&硕士</p>
+                                </div>
+                                <div class="edu-item">
+                                    <span>台北辅仁大学</span>
+                                    <p>应用美术设计 交换学生</p>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="about-columns">
-                    <div class="about-col">
-                        <span class="scramble-text">ABOUT //</span>
-                    </div>
-                    <div class="about-col">
-                        <p class="scramble-text">
-                            The project draws inspiration from one of<br>
-                            the renowned hair salons in Zagreb City.<br>
-                            It is truly a space where creativity thrives.
-                        </p>
-                    </div>
-                    <div class="about-col">
-                        <p class="scramble-text">
-                            The objective is to effectively showcase<br>
-                            the salon's offerings, expertise, and unique<br>
-                            atmosphere while providing essential<br>
-                            information to potential clients.
-                        </p>
+                        <!-- Column 2: Work Experience 1: QQ Browser -->
+                        <div class="about-col experience-col">
+                            <div class="exp-header">
+                                <h3>腾讯 · QQ浏览器</h3>
+                                <div class="exp-meta">
+                                    <span>PCG & CSIG 搜索设计中心</span>
+                                    <span>2020 ~ Now</span>
+                                </div>
+                            </div>
+                            <div class="exp-content">
+                                <div class="exp-item">
+                                    <h4>搜索游戏垂类设计</h4>
+                                    <p>
+                                        “从0到1”构建游戏搜索的产品体验。从项目初期搭建体验框架，到中期深化个性化运营与链路优化，后期结合游戏生命周期和用户活跃周期管理。实现了用户粘性与商业收入的双增长。
+                                    </p>
+                                </div>
+                                <div class="exp-item">
+                                    <h4>泛娱乐、学习、运营活动和相关浏览器工具</h4>
+                                    <p>影视、学习、信息流、等浏览器内容。提供多样化的内容和工具服务。</p>
+                                </div>
+                                <div class="exp-item">
+                                    <h4>AI功能落地和前瞻性探索</h4>
+                                    <p>AI快看、AI播客、听资讯等新场景的体验设计。项目并行同时，持续进行大量的前瞻性创新，持有专利20项。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 3: Work Experience 2: Smart City & Internship -->
+                        <div class="about-col experience-col">
+                            <div class="exp-header">
+                                <h3>腾讯 · 乘车码</h3>
+                                <div class="exp-meta">
+                                    <span>CDG FiT设计中心</span>
+                                    <span>2018 ~ 2020</span>
+                                </div>
+                            </div>
+                            <div class="exp-content">
+                                <div class="exp-item">
+                                    <h4>城市交通大数据可视化</h4>
+                                    <p>完成城市交通网在游戏引擎中的渲染呈现，负责灯光、材质、粒子等美术效果的渲染效果，探索各维度信息在空间场景中的交互方式。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="exp-header mt-lg">
+                                <h3>腾讯 · 实习</h3>
+                                <div class="exp-meta">
+                                    <span>CDG FiT设计中心</span>
+                                    <span>2016 ~ 2018</span>
+                                </div>
+                            </div>
+                            <div class="exp-content">
+                                <div class="exp-item">
+                                    <h4>乘车码/QQ红包/企业文化</h4>
+                                    <p>深度参与腾讯乘车码基础体验和市场推广、QQ主题红包、企业文化画册、活动KV、部门品牌形象建设等。</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -133,12 +199,12 @@
             <!-- Light Section (Like the bottom part of the image) -->
             <section class="light-section" id="work" data-scroll-section>
                 <div class="light-header">
-                    <h2>✶ WE ARE<br>&nbsp;&nbsp;&nbsp;&nbsp;THE BEST (IN)<br>GEOMETRIC<br>FORMS</h2>
+                    <h2 class="scramble-text">Key Works</h2>
                 </div>
                 <div class="work-grid">
                     <a href="#" onclick="openDetail(event, 1)" class="work-item" data-scroll data-scroll-speed="1.0">
                         <div class="work-image-container">
-                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/Work1.png"
                                 alt="1" loading="lazy">
                         </div>
                         <div class="work-info">
@@ -150,18 +216,18 @@
                     <a href="#" onclick="openDetail(event, 2)" class="work-item offset-right" data-scroll
                         data-scroll-speed="1.3">
                         <div class="work-image-container">
-                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/Work2.png"
                                 alt="2" loading="lazy">
                         </div>
                         <div class="work-info">
                             <span class="work-num mono">(02)</span>
-                            <h3 class="scramble-text">AI时代</h3>
+                            <h3 class="scramble-text">AI拓展设计师能力边界</h3>
                         </div>
                     </a>
 
                     <a href="#" onclick="openDetail(event, 3)" class="work-item" data-scroll data-scroll-speed="1.0">
                         <div class="work-image-container">
-                            <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop"
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/Work3.png"
                                 alt="3" loading="lazy">
                         </div>
                         <div class="work-info">
@@ -173,35 +239,35 @@
                     <a href="#" onclick="openDetail(event, 4)" class="work-item offset-right" data-scroll
                         data-scroll-speed="1.2">
                         <div class="work-image-container">
-                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/Work4.png"
                                 alt="4" loading="lazy">
                         </div>
                         <div class="work-info">
                             <span class="work-num mono">(04)</span>
-                            <h3 class="scramble-text">前瞻探索</h3>
+                            <h3 class="scramble-text">概念方案</h3>
                         </div>
                     </a>
 
                     <a href="#" onclick="openDetail(event, 5)" class="work-item" data-scroll data-scroll-speed="1.0">
                         <div class="work-image-container">
-                            <img src="https://images.unsplash.com/photo-1610368153308-41ec63ce2f11?q=80&w=2070&auto=format&fit=crop"
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/Work5.png"
                                 alt="5" loading="lazy">
                         </div>
                         <div class="work-info">
                             <span class="work-num mono">(05)</span>
-                            <h3 class="scramble-text">数字孪生、公共交通数据呈现</h3>
+                            <h3 class="scramble-text">乘车码数字城市项目</h3>
                         </div>
                     </a>
 
                     <a href="#" onclick="openDetail(event, 6)" class="work-item offset-right" data-scroll
                         data-scroll-speed="1.1">
                         <div class="work-image-container">
-                            <img src="https://images.unsplash.com/photo-1616859590833-289b02a9b319?q=80&w=1965&auto=format&fit=crop"
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/Work6.png"
                                 alt="6" loading="lazy">
                         </div>
                         <div class="work-info">
                             <span class="work-num mono">(06)</span>
-                            <h3 class="scramble-text">传统手艺人时代作品</h3>
+                            <h3 class="scramble-text">其他手搓项目</h3>
                         </div>
                     </a>
                 </div>
@@ -210,11 +276,11 @@
             <!-- Footer -->
             <footer class="footer-section" id="contact" data-scroll-section>
                 <div class="footer-content">
-                    <h2 class="footer-title scramble-text">GET IN TOUCH</h2>
+                    <h2 class="footer-title">GET IN TOUCH</h2>
                     <div class="footer-links">
-                        <a href="#" class="scramble-text">INSTAGRAM</a>
-                        <a href="#" class="scramble-text">TWITTER</a>
-                        <a href="#" class="scramble-text">LINKEDIN</a>
+                        <span>Wechat：leobu86</span>
+                        <span>E-mail：leobujiawei@gmail.com</span>
+                        <span>Tel：18661233656</span>
                     </div>
                 </div>
             </footer>
@@ -228,7 +294,11 @@
         <div class="detail-wrapper" id="detail-1"
             style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: var(--bg-color);">
             <nav class="detail-topbar">
-                <a href="#" onclick="closeDetail(event)" class="back-link">HOMEPAGE</a>
+                <a href="#" onclick="closeDetail(event)" class="back-link">
+                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/back.png"
+                        alt="Back" class="back-arrow">
+                    <span>Back</span>
+                </a>
                 <div class="topbar-title">搜索内容消费体验设计</div>
                 <div class="topbar-nav">
                     <a href="#" onclick="navigateDetail(event, -1)" class="nav-btn">上一篇</a>
@@ -333,10 +403,9 @@
                                         data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part1-game/1-10.png"
                                         alt="游戏生态 10">
                                 </div>
-                                <div class="demo-image">
-                                    <img loading="lazy"
-                                        data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part1-game/1-11.png"
-                                        alt="游戏生态 11">
+                                <div class="gallery-footer"
+                                    style="padding: 40px 0 20px; text-align: center; font-family: var(--font-body); font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">
+                                    ✶ 相关数据敏感，暂不作展示
                                 </div>
                             </div>
                         </section>
@@ -348,7 +417,7 @@
                             <div class="section-desc">
                                 影视搜索结果、六合专题生态、演员vcr宣发
                             </div>
-                            <div class="image-gallery no-gap">
+                            <div class="image-gallery gap-24">
                                 <div class="demo-image">
                                     <img loading="lazy"
                                         data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part2-tv/tv-01.png"
@@ -421,8 +490,12 @@
         <div class="detail-wrapper" id="detail-2"
             style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: var(--bg-color);">
             <nav class="detail-topbar">
-                <a href="#" onclick="closeDetail(event)" class="back-link">HOMEPAGE</a>
-                <div class="topbar-title">AI时代</div>
+                <a href="#" onclick="closeDetail(event)" class="back-link">
+                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/back.png"
+                        alt="Back" class="back-arrow">
+                    <span>Back</span>
+                </a>
+                <div class="topbar-title">AI拓展设计师能力边界</div>
                 <div class="topbar-nav">
                     <a href="#" onclick="navigateDetail(event, -1)" class="nav-btn">上一篇</a>
                     <span class="nav-divider">/</span>
@@ -434,11 +507,11 @@
                 <nav class="geo-tabs">
                     <a href="#section-1" class="geo-tab" data-target="section-1">
                         <div class="progress-fill"></div>
-                        <span class="tab-text">AI工作</span>
+                        <span class="tab-text">元宝模板</span>
                     </a>
                     <a href="#section-2" class="geo-tab" data-target="section-2">
                         <div class="progress-fill"></div>
-                        <span class="tab-text">元宝模板</span>
+                        <span class="tab-text">浏览器工具</span>
                     </a>
                 </nav>
                 <!-- 右侧图文滚动区域 -->
@@ -447,32 +520,49 @@
                         <section id="section-1" class="detail-section">
                             <div class="section-title">
                                 <span class="section-num">1</span>
-                                <h2>AI coding 工作方式进化</h2>
+                                <h2>元宝创作模板 · 2026 春节</h2>
                             </div>
                             <div class="section-desc">
-
                             </div>
-                            <div class="image-gallery">
+                            <div class="image-gallery no-gap">
                                 <div class="demo-image">
                                     <img loading="lazy"
-                                        src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop"
-                                        alt="AI工作">
+                                        data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part8-aicoding/AI01.png"
+                                        alt="AI01">
+                                </div>
+                                <div class="demo-image">
+                                    <img loading="lazy"
+                                        data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part8-aicoding/AI02.png"
+                                        alt="AI02">
                                 </div>
                             </div>
                         </section>
                         <section id="section-2" class="detail-section">
                             <div class="section-title">
                                 <span class="section-num">2</span>
-                                <h2>元宝春节创意模板</h2>
+                                <h2>QQ浏览器小工具 · 2026</h2>
                             </div>
                             <div class="section-desc">
-
                             </div>
-                            <div class="image-gallery">
+                            <div class="image-gallery gap-24">
                                 <div class="demo-image">
                                     <img loading="lazy"
-                                        src="https://images.unsplash.com/photo-1616859590833-289b02a9b319?q=80&w=1965&auto=format&fit=crop"
-                                        alt="春节模板">
+                                        data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part8-aicoding/AI03.png"
+                                        alt="AI03">
+                                </div>
+                                <div class="demo-image">
+                                    <video autoplay loop muted playsinline width="100%">
+                                        <source
+                                            src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part8-aicoding/AI04.mp4"
+                                            type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="demo-image">
+                                    <video autoplay loop muted playsinline width="100%">
+                                        <source
+                                            src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part8-aicoding/AI05.mp4"
+                                            type="video/mp4">
+                                    </video>
                                 </div>
                             </div>
                         </section>
@@ -485,7 +575,11 @@
         <div class="detail-wrapper" id="detail-3"
             style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: var(--bg-color);">
             <nav class="detail-topbar">
-                <a href="#" onclick="closeDetail(event)" class="back-link">HOMEPAGE</a>
+                <a href="#" onclick="closeDetail(event)" class="back-link">
+                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/back.png"
+                        alt="Back" class="back-arrow">
+                    <span>Back</span>
+                </a>
                 <div class="topbar-title">游戏化运营</div>
                 <div class="topbar-nav">
                     <a href="#" onclick="navigateDetail(event, -1)" class="nav-btn">上一篇</a>
@@ -498,11 +592,11 @@
                 <nav class="geo-tabs">
                     <a href="#section-1" class="geo-tab" data-target="section-1">
                         <div class="progress-fill"></div>
-                        <span class="tab-text">洛阳</span>
+                        <span class="tab-text">洛阳博物馆联合运营</span>
                     </a>
                     <a href="#section-2" class="geo-tab" data-target="section-2">
                         <div class="progress-fill"></div>
-                        <span class="tab-text">指南</span>
+                        <span class="tab-text">QQ浏览器假期指南</span>
                     </a>
                 </nav>
                 <!-- 右侧图文滚动区域 -->
@@ -511,7 +605,7 @@
                         <section id="section-1" class="detail-section">
                             <div class="section-title">
                                 <span class="section-num">1</span>
-                                <h2>洛阳博物馆联合运营项目</h2>
+                                <h2>洛阳博物馆联合运营项目 · 2025 春节</h2>
                             </div>
                             <div class="section-desc">
 
@@ -567,7 +661,7 @@
                         <section id="section-2" class="detail-section">
                             <div class="section-title">
                                 <span class="section-num">2</span>
-                                <h2>不摆烂指南系列</h2>
+                                <h2>不摆烂指南系列 · 2024</h2>
                             </div>
                             <div class="section-desc">
 
@@ -620,8 +714,12 @@
     <div class="detail-wrapper" id="detail-4"
         style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: var(--bg-color);">
         <nav class="detail-topbar">
-            <a href="#" onclick="closeDetail(event)" class="back-link">HOMEPAGE</a>
-            <div class="topbar-title">前瞻探索</div>
+            <a href="#" onclick="closeDetail(event)" class="back-link">
+                <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/back.png" alt="Back"
+                    class="back-arrow">
+                <span>Back</span>
+            </a>
+            <div class="topbar-title">概念方案</div>
             <div class="topbar-nav">
                 <a href="#" onclick="navigateDetail(event, -1)" class="nav-btn">上一篇</a>
                 <span class="nav-divider">/</span>
@@ -633,15 +731,15 @@
             <nav class="geo-tabs">
                 <a href="#section-1" class="geo-tab" data-target="section-1">
                     <div class="progress-fill"></div>
-                    <span class="tab-text">交互探索haha</span>
+                    <span class="tab-text">泛娱乐垂类</span>
                 </a>
                 <a href="#section-2" class="geo-tab" data-target="section-2">
                     <div class="progress-fill"></div>
-                    <span class="tab-text">泛娱乐</span>
+                    <span class="tab-text">百科文旅</span>
                 </a>
                 <a href="#section-3" class="geo-tab" data-target="section-3">
                     <div class="progress-fill"></div>
-                    <span class="tab-text">百科文旅</span>
+                    <span class="tab-text">互动表情</span>
                 </a>
             </nav>
             <!-- 右侧图文滚动区域 -->
@@ -650,60 +748,186 @@
                     <section id="section-1" class="detail-section">
                         <div class="section-title">
                             <span class="section-num">1</span>
-                            <h2>搜索+AI前沿交互方式探索</h2>
+                            <h2>泛娱乐垂类 · 2022</h2>
                         </div>
                         <div class="section-desc">
-
                         </div>
-                        <div class="image-gallery">
+                        <div class="image-gallery no-gap">
                             <div class="demo-image">
-                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
-                                    alt="前沿交互">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-01.jpeg"
+                                    alt="D10-01">
                             </div>
                             <div class="demo-image">
-                                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
-                                    alt="前沿交互">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-02.jpeg"
+                                    alt="D10-02">
                             </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-03.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-04.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-05.jpeg"
+                                    alt="D10-05">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-06.jpeg"
+                                    alt="D10-06">
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-07.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-08.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-09.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-10.jpeg"
+                                    alt="D10-10">
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part6-D10/D10-11.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="gallery-footer"
+                            style="padding: 40px 0 20px; text-align: center; font-family: var(--font-body); font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">
+                            ✶ 篇幅受限仅展示部分页面，更多内容欢迎来撩
                         </div>
                     </section>
                     <section id="section-2" class="detail-section">
                         <div class="section-title">
                             <span class="section-num">2</span>
-                            <h2>泛娱乐内容呈现方式探索</h2>
+                            <h2>百科文旅探索 · 2021</h2>
                         </div>
                         <div class="section-desc">
-
                         </div>
-                        <div class="image-gallery">
+                        <div class="image-gallery no-gap">
                             <div class="demo-image">
-                                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2070&auto=format&fit=crop"
-                                    alt="泛娱乐">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-01.jpeg"
+                                    alt="D9-01">
                             </div>
                             <div class="demo-image">
-                                <img src="https://images.unsplash.com/photo-1616859590833-289b02a9b319?q=80&w=1965&auto=format&fit=crop"
-                                    alt="泛娱乐">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-02.jpeg"
+                                    alt="D9-02">
                             </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-03.jpeg"
+                                    alt="D9-03">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-04.jpeg"
+                                    alt="D9-04">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-05.jpeg"
+                                    alt="D9-05">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-06.jpeg"
+                                    alt="D9-06">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-07.jpeg"
+                                    alt="D9-07">
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-08.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-09.jpeg"
+                                    alt="D9-09">
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-10.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/D9-11.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="gallery-footer"
+                            style="padding: 40px 0 20px; text-align: center; font-family: var(--font-body); font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">
+                            ✶ 篇幅受限仅展示部分页面，更多内容欢迎来撩
                         </div>
                     </section>
+
                     <section id="section-3" class="detail-section">
                         <div class="section-title">
                             <span class="section-num">3</span>
-                            <h2>百科+文旅内容呈现</h2>
+                            <h2>看点互动表情 · 2021</h2>
                         </div>
                         <div class="section-desc">
-
                         </div>
-                        <div class="image-gallery">
+                        <div class="image-gallery no-gap">
                             <div class="demo-image">
-                                <img loading="lazy"
-                                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
-                                    alt="百科文旅">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/emoji1.mp4"
+                                        type="video/mp4">
+                                </video>
                             </div>
                             <div class="demo-image">
-                                <img loading="lazy"
-                                    src="https://images.unsplash.com/photo-1616859590833-289b02a9b319?q=80&w=1965&auto=format&fit=crop"
-                                    alt="百科文旅">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part7-D9/emoji2.mp4"
+                                        type="video/mp4">
+                                </video>
                             </div>
+                        </div>
+                        <div class="gallery-footer"
+                            style="padding: 40px 0 20px; text-align: center; font-family: var(--font-body); font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">
+                            ✶ 篇幅受限仅展示部分页面，更多内容欢迎来撩
                         </div>
                     </section>
 
@@ -715,8 +939,12 @@
     <div class="detail-wrapper" id="detail-5"
         style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: var(--bg-color);">
         <nav class="detail-topbar">
-            <a href="#" onclick="closeDetail(event)" class="back-link">HOMEPAGE</a>
-            <div class="topbar-title">数字孪生、公共交通数据可视化呈现</div>
+            <a href="#" onclick="closeDetail(event)" class="back-link">
+                <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/back.png" alt="Back"
+                    class="back-arrow">
+                <span>Back</span>
+            </a>
+            <div class="topbar-title">乘车码数字城市项目</div>
             <div class="topbar-nav">
                 <a href="#" onclick="navigateDetail(event, -1)" class="nav-btn">上一篇</a>
                 <span class="nav-divider">/</span>
@@ -728,7 +956,7 @@
             <nav class="geo-tabs">
                 <a href="#section-1" class="geo-tab" data-target="section-1">
                     <div class="progress-fill"></div>
-                    <span class="tab-text">数据可视</span>
+                    <span class="tab-text">数字城市</span>
                 </a>
             </nav>
             <!-- 右侧图文滚动区域 -->
@@ -736,18 +964,124 @@
                 <div class="content-wrapper">
                     <section id="section-1" class="detail-section">
                         <div class="section-title">
-                            <span class="section-num">1</span>
-                            <h2>完整作品集</h2>
+                            <h2>乘车码数字城市项目 · 2018～2019</h2>
                         </div>
                         <div class="section-desc">
-                            包含数字孪生、公共交通数据的深度图表与大屏数据可视化的探索
                         </div>
-                        <div class="image-gallery">
+                        <div class="image-gallery gap-24">
+                            <div class="demo-image audio-toggle video-playing" onclick="toggleVideoPlay(this)">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity01.mp4"
+                                        type="video/mp4">
+                                </video>
+                                <div class="video-progress-container">
+                                    <div class="video-progress-bar"></div>
+                                </div>
+                                <div class="play-pause-btn">
+                                    <svg class="play-icon" viewBox="0 0 24 24">
+                                        <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                    <svg class="pause-icon" viewBox="0 0 24 24">
+                                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                    </svg>
+                                </div>
+                                <div class="audio-toggle-capsule"
+                                    onclick="event.stopPropagation(); toggleVideoAudio(this.parentElement)">
+                                    <span class="capsule-text muted-text">打开声音更沉浸</span>
+                                    <span class="capsule-text playing-text">点击静音播放</span>
+                                </div>
+                            </div>
                             <div class="demo-image">
                                 <img loading="lazy"
-                                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
-                                    alt="数据可视">
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity02.jpeg"
+                                    alt="SmartCity 02">
                             </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity03.jpeg"
+                                    alt="SmartCity 03">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity04.jpeg"
+                                    alt="SmartCity 04">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity05.jpeg"
+                                    alt="SmartCity 05">
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity06.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity07.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity08.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity09.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity10.jpeg"
+                                    alt="SmartCity 10">
+                            </div>
+                            <div class="demo-image">
+                                <img loading="lazy"
+                                    data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity11.jpeg"
+                                    alt="SmartCity 11">
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity12.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity13.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity14.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="demo-image">
+                                <video autoplay loop muted playsinline width="100%">
+                                    <source
+                                        src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part9-smartcity/smartcity15.mp4"
+                                        type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        <div class="gallery-footer"
+                            style="padding: 40px 0 20px; text-align: center; font-family: var(--font-body); font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;">
+                            ✶ 篇幅受限仅展示部分页面，更多内容欢迎来撩
                         </div>
                     </section>
 
@@ -759,8 +1093,12 @@
     <div class="detail-wrapper" id="detail-6"
         style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; background: var(--bg-color);">
         <nav class="detail-topbar">
-            <a href="#" onclick="closeDetail(event)" class="back-link">HOMEPAGE</a>
-            <div class="topbar-title">传统手艺人时代作品</div>
+            <a href="#" onclick="closeDetail(event)" class="back-link">
+                <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/back.png" alt="Back"
+                    class="back-arrow">
+                <span>Back</span>
+            </a>
+            <div class="topbar-title">其他手搓项目</div>
             <div class="topbar-nav">
                 <a href="#" onclick="navigateDetail(event, -1)" class="nav-btn">上一篇</a>
                 <span class="nav-divider">/</span>
@@ -772,30 +1110,56 @@
             <nav class="geo-tabs">
                 <a href="#section-1" class="geo-tab" data-target="section-1">
                     <div class="progress-fill"></div>
-                    <span class="tab-text">手艺人</span>
+                    <span class="tab-text">其他手搓项目</span>
                 </a>
             </nav>
             <!-- 右侧图文滚动区域 -->
             <main class="content-scroll">
                 <div class="content-wrapper">
                     <section id="section-1" class="detail-section">
-                        <div class="section-title">
-                            <span class="section-num">1</span>
-                            <h2>各类手艺人作品精选</h2>
-                        </div>
-                        <div class="section-desc">
-                            插画、3D、动效、游戏
-                        </div>
-                        <div class="image-gallery">
-                            <div class="demo-image">
-                                <img loading="lazy"
-                                    src="https://images.unsplash.com/photo-1616859590833-289b02a9b319?q=80&w=1965&auto=format&fit=crop"
-                                    alt="手艺人精选">
+                        <!-- No title or Part 1 here as per request -->
+                        <div class="image-gallery gap-24">
+                            <div class="gallery-item-wrapper">
+                                <div class="gallery-item-label">学习ue4的时候做了个赛车游戏demo</div>
+                                <div class="demo-image audio-toggle video-playing" onclick="toggleVideoPlay(this)">
+                                    <video autoplay loop muted playsinline width="100%">
+                                        <source
+                                            src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part10-hand/hand1.mp4"
+                                            type="video/mp4">
+                                    </video>
+                                    <div class="video-progress-container">
+                                        <div class="video-progress-bar"></div>
+                                    </div>
+                                    <div class="play-pause-btn">
+                                        <svg class="play-icon" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                        <svg class="pause-icon" viewBox="0 0 24 24">
+                                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                        </svg>
+                                    </div>
+                                    <div class="audio-toggle-capsule"
+                                        onclick="event.stopPropagation(); toggleVideoAudio(this.parentElement)">
+                                        <span class="capsule-text muted-text">打开声音更沉浸</span>
+                                        <span class="capsule-text playing-text">点击静音播放</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="demo-image">
-                                <img loading="lazy"
-                                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
-                                    alt="手艺人精选">
+                            <div class="gallery-item-wrapper">
+                                <div class="gallery-item-label">洛阳文旅项目解锁了一下无人机三维重建</div>
+                                <div class="demo-image">
+                                    <img loading="lazy"
+                                        data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part10-hand/hand2.png"
+                                        alt="hand2">
+                                </div>
+                            </div>
+                            <div class="gallery-item-wrapper">
+                                <div class="gallery-item-label">其他</div>
+                                <div class="demo-image">
+                                    <img loading="lazy"
+                                        data-src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/part10-hand/hand3.png"
+                                        alt="hand3">
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -830,7 +1194,7 @@
 
     <!-- Scripts -->
     <!-- Custom Cursor & Flashlight -->
-    <div class="flashlight"></div>
+
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 

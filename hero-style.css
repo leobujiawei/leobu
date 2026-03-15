@@ -1,114 +1,225 @@
 /* Hero Section Layout */
 .hero-section {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 80px;
     /* Accounts for top bar */
+    overflow: hidden;
+    /* Hide horizontal overflow when curtains part */
 }
 
-.hero-grid {
-    display: flex;
+.hero-stage {
+    position: relative;
     width: 100%;
     height: 100%;
-    min-height: 80vh;
-    border-top: 1px solid var(--border-color);
-}
-
-.hero-col {
-    position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Left Column */
-.hero-left {
-    flex: 1;
-    padding: 60px 40px;
-    border-right: 1px solid var(--border-color);
-    justify-content: space-between;
-}
-
-.hero-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-}
-
-.hero-title {
-    font-family: var(--font-heading);
-    font-size: 6vw;
-    line-height: 0.85;
-    margin-top: 20px;
-    font-weight: normal;
-    letter-spacing: -0.02em;
-    margin-bottom: auto;
-    /* Pushes the next elements down */
-}
-
-.hero-desc {
-    font-size: 11px;
-    line-height: 1.6;
-    max-width: 250px;
-    margin-top: 40px;
-    margin-bottom: 60px;
-    color: var(--text-muted);
-}
-
-.hero-bottom-list {
-    font-size: 11px;
-    line-height: 1.8;
-    color: var(--text-color);
-}
-
-.hero-bottom-list div {
-    margin-bottom: 5px;
-}
-
-
-
-/* Right Column (Image) */
-.hero-right {
-    flex: 1.2;
-    background-color: var(--bg-color);
-    position: relative;
-}
-
-.hero-image-wrapper {
-    width: 100%;
-    height: 100%;
+.hero-curtain,
+.hero-stage-bg {
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.hero-portrait {
     width: 100%;
     height: 100%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-curtain-left {
+    z-index: 1;
+}
+
+.hero-curtain-right {
+    z-index: 1;
+}
+
+.hero-stage-bg {
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Center Content & Scroll Indicator */
+.hero-center-content {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+    /* Let clicks pass through if necessary */
+}
+
+.hero-main-title {
+    font-family: 'NeueMachina-Ultrabold', sans-serif;
+    font-size: 3.8vw;
+    /* 5.5vw * 0.7 */
+    color: #fce2b5;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(150px);
+}
+
+.hero-scroll-indicator {
+    position: relative;
+    width: 120px;
+    /* 80px * 1.5 */
+    height: 120px;
+    /* 80px * 1.5 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(150px);
+}
+
+.scroll-spin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: rotate-scroll 10s linear infinite;
+}
+
+.scroll-arrow {
+    position: relative;
+    width: 30px;
+    /* 20px * 1.5 */
+    height: auto;
+    z-index: 2;
+}
+
+@keyframes rotate-scroll {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Geometric Wireframe Shapes */
+.hero-geo-shape {
+    position: absolute;
+    width: 15vw;
+    height: 15vw;
+    pointer-events: none;
+    z-index: 2;
+    /* Same as hero-stage-bg to integrate into the scene */
+    stroke: #fce2b5;
+    fill: none;
+    stroke-width: 1px;
+    opacity: 0.4;
+    transition: transform 0.3s ease;
+}
+
+.hero-geo-shape * {
+    vector-effect: non-scaling-stroke;
+}
+
+.geo-pentagon {
+    top: 15%;
+    left: 18%;
+    transform: rotate(-15deg);
+    width: 12vw;
+    height: 12vw;
+}
+
+.geo-circle {
+    bottom: calc(12% - 200px);
+    left: 5%;
+    width: 30vw;
+    height: 30vw;
+}
+
+.geo-diamond {
+    top: calc(32% + 200px);
+    right: 5%;
+    width: 24vw;
+    height: 24vw;
+    transform: rotate(5deg);
 }
 
 @media (max-width: 1024px) {
-    .hero-grid {
-        flex-direction: column;
-    }
-
-    .hero-left,
-    .hero-right {
-        width: 100%;
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .hero-title {
-        font-size: 9vw;
-    }
-
-    .hero-right {
+    .hero-section {
         height: 60vh;
+    }
+}
+
+/* Hidden Interactive Images Styling */
+.hero-hidden-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Container itself should not block */
+}
+
+.hero-hidden-image {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.85) translateY(10px);
+    /* Start slightly smaller and lower */
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* Bouncy elastic easing */
+    z-index: 10;
+    width: 12vw;
+    height: auto;
+    pointer-events: auto;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+    filter: brightness(0.9);
+    /* Slightly darker when hidden to pop more on hover */
+}
+
+.hero-hidden-image:hover {
+    opacity: 1;
+    transform: scale(1.1) translateY(0);
+    /* Pop up and grow */
+    filter: brightness(1);
+}
+
+/* Specific Positions based on mockup boxes */
+.st-01 {
+    top: 15%;
+    left: 15%;
+}
+
+.st-02 {
+    top: 40%;
+    left: 5%;
+    width: 14vw;
+}
+
+.st-03 {
+    top: 65%;
+    left: 10%;
+}
+
+.st-04 {
+    top: 25%;
+    right: 8%;
+}
+
+.st-05 {
+    top: 65%;
+    right: 10%;
+}
+
+@media (max-width: 1024px) {
+    .hero-hidden-image {
+        width: 15vw;
     }
 }

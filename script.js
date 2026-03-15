@@ -37,8 +37,12 @@ if (cursor && follower) {
         yFollowerSetter(posY - 20);
 
         // Update Flashlight position
+        let scrollY = 0;
+        if (typeof locoScroll !== 'undefined' && locoScroll.scroll && locoScroll.scroll.instance) {
+            scrollY = locoScroll.scroll.instance.scroll.y;
+        }
         document.documentElement.style.setProperty('--flashlight-x', `${mouseX}px`);
-        document.documentElement.style.setProperty('--flashlight-y', `${mouseY}px`);
+        document.documentElement.style.setProperty('--flashlight-y', `${mouseY + scrollY}px`);
     });
 
 
@@ -80,7 +84,17 @@ const locoScroll = new LocomotiveScroll({
 });
 
 // Update ScrollTrigger on Locomotive Scroll event
-locoScroll.on("scroll", ScrollTrigger.update);
+locoScroll.on("scroll", (args) => {
+    ScrollTrigger.update();
+    const topBar = document.querySelector('.topbar');
+    if (topBar) {
+        if (args.scroll.y > 50) {
+            topBar.classList.add('is-scrolled');
+        } else {
+            topBar.classList.remove('is-scrolled');
+        }
+    }
+});
 
 // Tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element
 ScrollTrigger.scrollerProxy("#main-content", {
@@ -98,24 +112,74 @@ ScrollTrigger.scrollerProxy("#main-content", {
 
 // Refresh ScrollTrigger when window updates
 ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+
+// Debounce helper
+function debounce(func, wait) {
+    let timeout;
+    return function () {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+// Helper to refresh everything when layout changes
+const refreshScroll = debounce(() => {
+    if (typeof locoScroll !== 'undefined') {
+        locoScroll.update();
+        ScrollTrigger.refresh();
+    }
+}, 100); // Wait 100ms after the last change to refresh
+
+// 1. Refresh on images load
+window.addEventListener('load', () => {
+    refreshScroll();
+    // Second pass to handle late layout shifts
+    setTimeout(refreshScroll, 500);
+});
+
+// 2. Refresh on window resize
+window.addEventListener('resize', refreshScroll);
+
+// 3. ResizeObserver to catch any dynamic height changes
+const resizeObserver = new ResizeObserver(() => {
+    refreshScroll();
+});
+if (document.querySelector('#main-content')) {
+    resizeObserver.observe(document.querySelector('#main-content'));
+}
+
+// Initial refresh
 ScrollTrigger.refresh();
 
-// --- 1.5 Flashlight Interaction ---
-ScrollTrigger.create({
-    trigger: "#work",
-    scroller: "#main-content",
-    start: "top 80%", // Starts fading when #work hits 80% of viewport
-    onEnter: () => {
-        const flashlight = document.querySelector('.flashlight');
-        if (flashlight) flashlight.style.opacity = 0;
-    },
-    onLeaveBack: () => {
-        const flashlight = document.querySelector('.flashlight');
-        if (flashlight && !document.body.classList.contains('detail-active')) {
-            flashlight.style.opacity = 1;
+// --- 1.2 Hero Curtain Animation ---
+if (document.querySelector('.hero-stage')) {
+    gsap.to('.hero-curtain-left', {
+        xPercent: -50,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".hero-section",
+            scroller: "#main-content",
+            start: "top top",
+            end: "+=150%", // Continue animating for 1.5x the height
+            scrub: true
         }
-    }
-});
+    });
+
+    gsap.to('.hero-curtain-right', {
+        xPercent: 50,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".hero-section",
+            scroller: "#main-content",
+            start: "top top",
+            end: "+=150%",
+            scrub: true
+        }
+    });
+}
+
+
 
 // --- 2. Text Scramble Effect ---
 class TextScramble {
@@ -176,33 +240,36 @@ class TextScramble {
 }
 
 // Initialize Scramble Effect for Elements
-const titles = document.querySelectorAll('.scramble-text');
+function initScramble() {
+    const titles = document.querySelectorAll('.scramble-text:not(.scramble-init)');
 
-titles.forEach((el) => {
-    const fx = new TextScramble(el);
-    const finalText = el.innerText; // Store the original text
+    titles.forEach((el) => {
+        el.classList.add('scramble-init');
+        const fx = new TextScramble(el);
+        const finalText = el.innerText; // Store the original text
 
-    // Clear initially to create the "search" effect from nothing
-    el.innerHTML = '&nbsp;';
+        // Clear initially with spaces of the same visible presence to hold width if possible,
+        // or just rely on the fact that it has its final text initially (opacity 0)
+        // el.innerHTML = '&nbsp;'; // REMOVED to prevent layout shift
 
-    ScrollTrigger.create({
-        trigger: el,
-        scroller: "#main-content", // Connect to Locomotive
-        start: "top 90%", // Start when top of element hits 90% of viewport height
-        onEnter: () => {
-            el.style.opacity = 1;
-            fx.setText(finalText);
-        },
-        // Optional: Re-play on re-entry?
-        // onEnterBack: () => fx.setText(finalText) 
+        ScrollTrigger.create({
+            trigger: el,
+            scroller: "#main-content",
+            start: "top 95%", // Slightly lower trigger point
+            onEnter: () => {
+                el.style.opacity = 1;
+                fx.setText(finalText);
+            },
+            // If it's already past the point when refreshing, show it
+            once: true
+        });
     });
-});
+}
 
 // --- 3. Loader Animation ---
 document.addEventListener('DOMContentLoaded', () => {
     const loader = document.querySelector('.loader');
     const body = document.body;
-
     const bar = document.querySelector('.loader-bar');
 
     // Immediate progress start to show it's working
@@ -230,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             loader.style.display = 'none';
                             body.classList.add('loaded');
                             if (typeof locoScroll !== 'undefined') {
+                                initScramble();
                                 ScrollTrigger.refresh();
                                 locoScroll.update();
                             }
@@ -296,6 +364,12 @@ window.closeDetail = function (e) {
 
     document.querySelectorAll('.detail-wrapper').forEach(el => {
         el.classList.remove('active');
+        // Pause all videos when closing
+        el.querySelectorAll('video').forEach(video => {
+            video.pause();
+            const parent = video.closest('.demo-image');
+            if (parent) parent.classList.remove('video-playing');
+        });
     });
 
     setTimeout(() => {
@@ -407,6 +481,8 @@ function initDetailLogic(detailEl) {
     scrollContainer.addEventListener('scroll', () => {
         const scrollTop = scrollContainer.scrollTop;
         const containerHeight = scrollContainer.offsetHeight;
+        const scrollHeight = scrollContainer.scrollHeight;
+        const isAtBottom = scrollTop + containerHeight >= scrollHeight - 5;
 
         sections.forEach((section, index) => {
             const tab = newTabs[index];
@@ -417,16 +493,19 @@ function initDetailLogic(detailEl) {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
 
-            // Adjust markers for "active" state
-            // Section is active if it takes up the middle of the screen
-            const isActive = scrollTop >= sectionTop - 100 && scrollTop < sectionTop + sectionHeight - 100;
-
             let progress = 0;
-            if (isActive) {
-                // Progress within this section [0-100]
+
+            // Check if we are currently scrolling through this section
+            const isCurrentlyActive = (scrollTop >= sectionTop - 100 && scrollTop < sectionTop + sectionHeight - 100);
+
+            if (isAtBottom && index === sections.length - 1) {
+                // Force last tab to 100% at bottom
+                progress = 100;
+            } else if (isCurrentlyActive) {
+                // Show progress only for the active section
                 progress = Math.min(100, Math.max(0, ((scrollTop - (sectionTop - 100)) / (sectionHeight)) * 100));
             } else {
-                // If not active (scrolled past or not reached), reset to 0
+                // Reset to 0 if not active (including scrolled-past sections)
                 progress = 0;
             }
 
@@ -439,11 +518,80 @@ function initDetailLogic(detailEl) {
 }
 
 function loadDetailImages(container) {
-    const images = container.querySelectorAll('img[data-src]');
+    // 1. Handle Images
+    const images = container.querySelectorAll('.demo-image img');
     images.forEach(img => {
+        const parent = img.closest('.demo-image');
+
+        // If image has data-src, it hasn't been started yet
         if (img.getAttribute('data-src')) {
+            parent.classList.add('is-loading');
             img.src = img.getAttribute('data-src');
             img.removeAttribute('data-src');
         }
+
+        // Common loading check (works for data-src swap or normal src)
+        if (!img.complete) {
+            parent.classList.add('is-loading');
+            img.onload = () => parent.classList.remove('is-loading');
+            img.onerror = () => parent.classList.remove('is-loading');
+        } else {
+            parent.classList.remove('is-loading');
+        }
     });
+
+    // 2. Handle Videos
+    const videos = container.querySelectorAll('.demo-image video');
+    videos.forEach(video => {
+        const parent = video.closest('.demo-image');
+
+        // Ensure video is played explicitly since it might be hidden initially
+        video.play().catch(error => {
+            console.log("Autoplay prevented or failed:", error);
+        });
+
+        // Videos might take a moment to be ready to play
+        if (video.readyState < 3) { // 3 = HAVE_FUTURE_DATA
+            parent.classList.add('is-loading');
+            video.oncanplay = () => parent.classList.remove('is-loading');
+            video.onerror = () => parent.classList.remove('is-loading');
+        } else {
+            parent.classList.remove('is-loading');
+        }
+
+        // 3. Handle Video Progress Bar (if exists)
+        const progressBar = parent.querySelector('.video-progress-bar');
+        if (progressBar) {
+            video.ontimeupdate = () => {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = percentage + '%';
+            };
+        }
+    });
+}
+
+function toggleVideoAudio(el) {
+    const video = el.querySelector('video');
+    if (!video) return;
+
+    if (video.muted) {
+        video.muted = false;
+        el.classList.add('playing-audio');
+    } else {
+        video.muted = true;
+        el.classList.remove('playing-audio');
+    }
+}
+
+function toggleVideoPlay(el) {
+    const video = el.querySelector('video');
+    if (!video) return;
+
+    if (video.paused) {
+        video.play();
+        el.classList.add('video-playing');
+    } else {
+        video.pause();
+        el.classList.remove('video-playing');
+    }
 }

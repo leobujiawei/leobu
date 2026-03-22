@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #1a1a1a;
+    --bg-color: #000000;
     --text-color: #ffffff;
     --text-muted: #999999;
     --accent-color: #a6192e;
@@ -38,7 +38,7 @@ body.detail-active {
     font-size: 18px;
     /* Changed from 28px */
     font-weight: normal;
-    color: #fce2b5;
+    color: #ffdf99;
     background-color: #000000;
     border-bottom: none;
 }
@@ -95,7 +95,7 @@ body.detail-active {
 }
 
 .nav-divider {
-    color: rgba(252, 226, 181, 0.3);
+    color: rgba(255, 223, 153, 0.3);
 }
 
 /* Layout Container */
@@ -300,7 +300,7 @@ body.detail-active {
     .demo-image,
     .section-title,
     .gallery-item-wrapper {
-        width: 60vw;
+        width: 70vw;
         margin-left: auto;
         margin-right: auto;
     }
@@ -484,7 +484,7 @@ body.detail-active {
 .video-progress-bar {
     width: 0%;
     height: 100%;
-    background: #fce2b5;
+    background: #ffdf99;
     /* Matching the accent beige color */
     transition: width 0.1s linear;
 }
@@ -502,9 +502,47 @@ body.detail-active {
 #detail-6 .demo-image,
 #detail-6 .gallery-item-wrapper {
     margin-left: 0;
-    width: 60vw;
+    width: 70vw;
 }
 
 #detail-6 .content-wrapper {
     align-items: flex-start;
+}
+
+/* Mobile Adaptation (width < 768px) */
+@media (max-width: 768px) {
+
+    /* 4. Detail Page: Left Tab 40px, Right Image Column 85% */
+    .geo-tabs {
+        flex: 0 0 40px !important;
+    }
+
+    .geo-tab .tab-text {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .content-wrapper {
+        padding: 40px 20px;
+    }
+
+    .demo-image,
+    .section-title,
+    .gallery-item-wrapper,
+    #detail-6 .demo-image,
+    #detail-6 .gallery-item-wrapper {
+        width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .section-num {
+        font-size: 48px;
+    }
+
+    /* 5. Hide detail topbar title and nav on mobile */
+    .topbar-title,
+    .topbar-nav {
+        display: none !important;
+    }
 }

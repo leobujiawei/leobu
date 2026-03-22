@@ -75,13 +75,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 // --- 1. Locomotive Scroll Setup ---
 const locoScroll = new LocomotiveScroll({
-    el: document.querySelector('#main-content'), // We need a wrapper for Locomotive
+    el: document.querySelector('#main-content'),
     smooth: true,
-    lerp: 0.1, // Linear Interpolation, 0.1 is standard smooth
-    multiplier: 1.0, // Scroll speed multiplier
+    lerp: 0.07, // Smoother transitions (silkier feel)
+    multiplier: 1.1, // Increased responsiveness to user input
     tablet: { smooth: true },
-    smartphone: { smooth: true }
+    smartphone: { smooth: true },
+    touchMultiplier: 3
 });
+
+// Initial stop to prevent interaction while loading/calculating
+locoScroll.stop();
 
 // Update ScrollTrigger on Locomotive Scroll event
 locoScroll.on("scroll", (args) => {
@@ -297,9 +301,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             loader.style.display = 'none';
                             body.classList.add('loaded');
                             if (typeof locoScroll !== 'undefined') {
+                                locoScroll.update();
+                                locoScroll.start();
                                 initScramble();
                                 ScrollTrigger.refresh();
-                                locoScroll.update();
+                                // Second update after a brief moment to ensure layout stability
+                                setTimeout(() => {
+                                    locoScroll.update();
+                                    ScrollTrigger.refresh();
+                                }, 100);
                             }
                         }
                     });

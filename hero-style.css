@@ -32,6 +32,8 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    will-change: transform; /* Hardware acceleration hint */
+    backface-visibility: hidden;
 }
 
 .hero-curtain-left {
@@ -153,7 +155,7 @@
     /* Container itself should not block */
 }
 
-.hero-hidden-image {
+.hero-hidden-image-container {
     position: absolute;
     opacity: 0;
     transform: scale(0.85) translateY(10px);
@@ -162,17 +164,69 @@
     /* Bouncy elastic easing */
     z-index: 10;
     width: 14vw;
-    height: auto;
     pointer-events: auto;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
-    filter: brightness(0.9);
-    /* Slightly darker when hidden to pop more on hover */
 }
 
-.hero-hidden-image:hover {
+.hero-hidden-image-container:hover {
     opacity: 1;
     transform: scale(1.1) translateY(0);
     /* Pop up and grow */
+}
+
+/* 1px White Border and Corner Squares on Hover */
+.hero-hidden-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    outline: 1px solid white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-hidden-image-container:hover::before {
+    opacity: 1;
+}
+
+.hero-hidden-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: -4px; /* Center 8x8 square on corner endpoint */
+    background: 
+        linear-gradient(white, white) 0 0,
+        linear-gradient(white, white) 100% 0,
+        linear-gradient(white, white) 0 100%,
+        linear-gradient(white, white) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 8px 8px;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.hero-hidden-image-container:hover::after {
+    opacity: 1;
+}
+
+.hero-hidden-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: brightness(0.9);
+    /* Slightly darker when hidden to pop more on hover */
+    transition: filter 0.6s ease;
+}
+
+.hero-hidden-image-container:hover .hero-hidden-image {
     filter: brightness(1);
 }
 

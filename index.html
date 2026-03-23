@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leo Bu - Visual Designer</title>
     <meta name="description" content="个人创意作品集，展示设计与开发项目。">
-    <link rel="preload" href="PPNeueMachina-InktrapRegular.otf" as="font" type="font/otf" crossorigin>
     <link rel="preload" href="PPNeueMachina-InktrapUltrabold.otf" as="font" type="font/otf" crossorigin>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hero-style.css">
@@ -50,9 +49,9 @@
                 <span class="topbar-brand">Leobu</span>
             </div>
             <div class="topbar-right">
-                <a href="#about" onclick="locoScroll.scrollTo('#about')" class="scramble-text">About me</a>
-                <a href="#work" onclick="locoScroll.scrollTo('#work')" class="scramble-text">Work</a>
-                <a href="#contact" onclick="locoScroll.scrollTo('#contact')" class="scramble-text">Get in Touch</a>
+                <a href="#about" onclick="safeScrollTo('#about', event)" class="scramble-text">About me</a>
+                <a href="#work" onclick="safeScrollTo('#work', event)" class="scramble-text">Work</a>
+                <a href="#contact" onclick="safeScrollTo('#contact', event)" class="scramble-text">Get in Touch</a>
             </div>
         </nav>
 
@@ -61,8 +60,9 @@
             <!-- Hero Section -->
             <header class="hero-section" data-scroll-section>
                 <div class="hero-stage">
-                    <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg2/2stage.png"
-                        class="hero-stage-bg" alt="Stage Frame">
+                    <video autoplay loop muted playsinline class="hero-stage-bg">
+                        <source src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg2/2stagevideo.mp4" type="video/mp4">
+                    </video>
                     <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg2/2stage-left.png"
                         class="hero-curtain hero-curtain-left" alt="Left Curtain">
                     <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg2/2stage-right.png"
@@ -78,16 +78,26 @@
 
                     <!-- Hidden Interactive Images on Stage Sides -->
                     <div class="hero-hidden-images">
-                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st01.png"
-                            class="hero-hidden-image st-01" alt="Stage Side 1">
-                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st02.png"
-                            class="hero-hidden-image st-02" alt="Stage Side 2">
-                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st03.png"
-                            class="hero-hidden-image st-03" alt="Stage Side 3">
-                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st04.png"
-                            class="hero-hidden-image st-04" alt="Stage Side 4">
-                        <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st05.png"
-                            class="hero-hidden-image st-05" alt="Stage Side 5">
+                        <div class="hero-hidden-image-container st-01">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st01.png"
+                                class="hero-hidden-image" alt="Stage Side 1">
+                        </div>
+                        <div class="hero-hidden-image-container st-02">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st02.png"
+                                class="hero-hidden-image" alt="Stage Side 2">
+                        </div>
+                        <div class="hero-hidden-image-container st-03">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st03.png"
+                                class="hero-hidden-image" alt="Stage Side 3">
+                        </div>
+                        <div class="hero-hidden-image-container st-04">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st04.png"
+                                class="hero-hidden-image" alt="Stage Side 4">
+                        </div>
+                        <div class="hero-hidden-image-container st-05">
+                            <img src="https://personalwebsite-1258212294.cos.ap-guangzhou.myqcloud.com/indeximg/st05.png"
+                                class="hero-hidden-image" alt="Stage Side 5">
+                        </div>
                     </div>
                 </div>
                 <!-- Straddling Scroll Indicator -->
@@ -103,7 +113,7 @@
 
             <!-- About Section -->
             <section class="about-section" id="about" data-scroll-section>
-                <div class="about-scroll-wrapper" data-scroll>
+                <div class="about-scroll-wrapper">
                     <div class="about-container">
                         <!-- Column 1: Profile Info -->
                         <div class="about-col profile-col">

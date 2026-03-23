@@ -9,41 +9,33 @@ let mouseX = 0, mouseY = 0;
 let pageMouseX = 0, pageMouseY = 0;
 
 if (cursor && follower) {
-    // Quick setters for performance
-    const xCursorSetter = gsap.quickSetter(cursor, "x", "px");
-    const yCursorSetter = gsap.quickSetter(cursor, "y", "px");
-    const xFollowerSetter = gsap.quickSetter(follower, "x", "px");
-    const yFollowerSetter = gsap.quickSetter(follower, "y", "px");
+    // Safe setter initialization
+    const xCursorSetter = typeof gsap !== 'undefined' ? gsap.quickSetter(cursor, "x", "px") : null;
+    const yCursorSetter = typeof gsap !== 'undefined' ? gsap.quickSetter(cursor, "y", "px") : null;
+    const xFollowerSetter = typeof gsap !== 'undefined' ? gsap.quickSetter(follower, "x", "px") : null;
+    const yFollowerSetter = typeof gsap !== 'undefined' ? gsap.quickSetter(follower, "y", "px") : null;
 
-    window.addEventListener("mousemove", e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        pageMouseX = e.pageX;
-        pageMouseY = e.pageY;
-    });
+    if (typeof gsap !== 'undefined') {
+        window.addEventListener("mousemove", e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            pageMouseX = e.pageX;
+            pageMouseY = e.pageY;
+        });
 
-    gsap.ticker.add(() => {
-        // Smooth follower movement (increased responsiveness)
-        const dt = 1.0 - Math.pow(1.0 - 0.3, gsap.ticker.deltaRatio());
-        posX += (mouseX - posX) * dt;
-        posY += (mouseY - posY) * dt;
+        gsap.ticker.add(() => {
+            // Smooth follower movement (increased responsiveness)
+            const dt = 1.0 - Math.pow(1.0 - 0.3, gsap.ticker.deltaRatio());
+            posX += (mouseX - posX) * dt;
+            posY += (mouseY - posY) * dt;
 
-        // Position cursor exactly at mouse
-        xCursorSetter(mouseX - 4); // half of 8px
-        yCursorSetter(mouseY - 4);
-
-        // Position follower with lag
-        xFollowerSetter(posX - 20); // half of 40px
-        yFollowerSetter(posY - 20);
-
-        // Update Flashlight position
-        let scrollY = 0;
-        if (typeof locoScroll !== 'undefined' && locoScroll.scroll && locoScroll.scroll.instance) {
-            scrollY = locoScroll.scroll.instance.scroll.y;
-        }
-        document.documentElement.style.setProperty('--flashlight-x', `${mouseX}px`);
-        document.documentElement.style.setProperty('--flashlight-y', `${mouseY + scrollY}px`);
-    });
+            // Position cursor exactly at mouse
+            if (xCursorSetter) xCursorSetter(mouseX - 4);
+            if (xFollowerSetter) xFollowerSetter(posX - 20);
+            if (yCursorSetter) yCursorSetter(mouseY - 4);
+            if (yFollowerSetter) yFollowerSetter(posY - 20);
+        });
+    }
 
 
     // Hover effects
@@ -70,49 +62,50 @@ if (cursor && follower) {
     });
 }
 
-// Register GSAP Plugins
-gsap.registerPlugin(ScrollTrigger);
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
-// --- 1. Locomotive Scroll Setup ---
-const locoScroll = new LocomotiveScroll({
-    el: document.querySelector('#main-content'),
-    smooth: true,
-    lerp: 0.07, // Smoother transitions (silkier feel)
-    multiplier: 1.1, // Increased responsiveness to user input
-    tablet: { smooth: true },
-    smartphone: { smooth: true },
-    touchMultiplier: 3
-});
-
-// Initial stop to prevent interaction while loading/calculating
-locoScroll.stop();
+let locoScroll;
+if (typeof LocomotiveScroll !== 'undefined') {
+    locoScroll = new LocomotiveScroll({
+        el: document.querySelector('#main-content'),
+        smooth: true,
+        lerp: 0.12, // Increased for a more direct, responsive feel
+        multiplier: 1.1, // Added a slight boost to reduce scrolling effort
+        tablet: { smooth: false },
+        smartphone: { smooth: false }
+    });
+    
+    // Initial stop to prevent interaction while loading/calculating
+    locoScroll.stop();
+}
 
 // Update ScrollTrigger on Locomotive Scroll event
-locoScroll.on("scroll", (args) => {
-    ScrollTrigger.update();
-    const topBar = document.querySelector('.topbar');
-    if (topBar) {
-        if (args.scroll.y > 50) {
-            topBar.classList.add('is-scrolled');
-        } else {
-            topBar.classList.remove('is-scrolled');
+if (locoScroll && typeof ScrollTrigger !== 'undefined') {
+    locoScroll.on("scroll", (args) => {
+        ScrollTrigger.update();
+        const topBar = document.querySelector('.topbar');
+        if (topBar) {
+            if (args.scroll.y > 50) {
+                topBar.classList.add('is-scrolled');
+            } else {
+                topBar.classList.remove('is-scrolled');
+            }
         }
-    }
-});
+    });
 
-// Tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element
-ScrollTrigger.scrollerProxy("#main-content", {
-    scrollTop(value) {
-        return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-    },
-    getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-    },
-    // Locomotive Scroll handles things completely differently on mobile devices - it doesn't even transform the container at all! 
-    // So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. 
-    // We sense it by checking to see if there's a transform applied to the container (the Locomotive Scroll-controlled element).
-    pinType: document.querySelector("#main-content").style.transform ? "transform" : "fixed"
-});
+    // Tell ScrollTrigger to use these proxy methods for the ".smooth-scroll" element
+    ScrollTrigger.scrollerProxy("#main-content", {
+        scrollTop(value) {
+            return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+        },
+        getBoundingClientRect() {
+            return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+        },
+        pinType: document.querySelector("#main-content").style.transform ? "transform" : "fixed"
+    });
+}
 
 // Refresh ScrollTrigger when window updates
 ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
@@ -133,7 +126,7 @@ const refreshScroll = debounce(() => {
         locoScroll.update();
         ScrollTrigger.refresh();
     }
-}, 100); // Wait 100ms after the last change to refresh
+}, 250); // Increased wait time to 250ms to reduce overhead during page settling
 
 // 1. Refresh on images load
 window.addEventListener('load', () => {
@@ -146,8 +139,15 @@ window.addEventListener('load', () => {
 window.addEventListener('resize', refreshScroll);
 
 // 3. ResizeObserver to catch any dynamic height changes
-const resizeObserver = new ResizeObserver(() => {
-    refreshScroll();
+let lastHeight = 0;
+const resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+        const height = entry.contentRect.height;
+        if (Math.abs(height - lastHeight) > 10) { // Only refresh if height change is $> 10px$
+            lastHeight = height;
+            refreshScroll();
+        }
+    }
 });
 if (document.querySelector('#main-content')) {
     resizeObserver.observe(document.querySelector('#main-content'));
@@ -284,6 +284,36 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'power3.out'
     });
 
+    // Function to initialize page once loaded
+    const startPage = () => {
+        if (body.classList.contains('loaded')) return;
+        
+        gsap.to(loader, {
+            opacity: 0,
+            duration: 0.8,
+            onComplete: () => {
+                loader.style.display = 'none';
+                body.classList.add('loaded');
+                
+                // Initialize everything after a brief paint cycle to ensure smoothness
+                requestAnimationFrame(() => {
+                    if (typeof locoScroll !== 'undefined' && locoScroll) {
+                        locoScroll.update();
+                        locoScroll.start();
+                    }
+                    
+                    if (typeof ScrollTrigger !== 'undefined') {
+                        initScramble();
+                        ScrollTrigger.refresh();
+                    } else {
+                        // Fallback: Just show text if animation library is missing
+                        document.querySelectorAll('.scramble-text').forEach(el => el.style.opacity = 1);
+                    }
+                });
+            }
+        });
+    };
+
     // Use Font Loading API to wait for fonts being ready
     document.fonts.ready.then(() => {
         // Progress animation to 100%
@@ -293,42 +323,16 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "power2.inOut",
             onComplete: () => {
                 // Subtle pause before exit
-                setTimeout(() => {
-                    gsap.to(loader, {
-                        opacity: 0,
-                        duration: 0.8,
-                        onComplete: () => {
-                            loader.style.display = 'none';
-                            body.classList.add('loaded');
-                            if (typeof locoScroll !== 'undefined') {
-                                locoScroll.update();
-                                locoScroll.start();
-                                initScramble();
-                                ScrollTrigger.refresh();
-                                // Second update after a brief moment to ensure layout stability
-                                setTimeout(() => {
-                                    locoScroll.update();
-                                    ScrollTrigger.refresh();
-                                }, 100);
-                            }
-                        }
-                    });
-                }, 200);
+                setTimeout(startPage, 200);
             }
         });
+    }).catch(err => {
+        console.warn("Font loading failed, falling back:", err);
+        startPage();
     });
 
     // Fallback: If fonts take too long, still show the site
-    setTimeout(() => {
-        if (!body.classList.contains('loaded')) {
-            gsap.to(loader, {
-                opacity: 0, duration: 0.8, onComplete: () => {
-                    loader.style.display = 'none';
-                    body.classList.add('loaded');
-                }
-            });
-        }
-    }, 5000);
+    setTimeout(startPage, 5000);
 });
 
 
@@ -605,3 +609,16 @@ function toggleVideoPlay(el) {
         el.classList.remove('video-playing');
     }
 }
+
+// Safe scrolling function for navbar links
+window.safeScrollTo = function(target, e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (typeof locoScroll !== 'undefined' && locoScroll) {
+        locoScroll.scrollTo(target);
+    } else {
+        const targetEl = document.querySelector(target);
+        if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+};
